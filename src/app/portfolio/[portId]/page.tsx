@@ -17,6 +17,7 @@ import {
   Loader2,
   Circle,
   Codesandbox,
+  Linkedin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -199,7 +200,9 @@ const PortfolioPage = () => {
                 {userData?.email && (
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4" />
-                    <span>{userData.email}</span>
+                    <a href={`mailto:${userData?.email}`} target="_blank">
+                      {userData.email}
+                    </a>
                   </div>
                 )}
                 {userData?.phone && (
@@ -216,14 +219,18 @@ const PortfolioPage = () => {
                 )}
                 {userData?.github && (
                   <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    <span>{userData.github}</span>
+                    <Github className="w-4 h-4" />
+                    <a href={userData.github} target="_blank">
+                      {userData.github}
+                    </a>
                   </div>
                 )}
                 {userData?.linkedIn && (
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    <span>{userData.linkedIn}</span>
+                    <Linkedin className="w-4 h-4" />
+                    <a href={userData.linkedIn} target="_blank">
+                      {userData.linkedIn}
+                    </a>
                   </div>
                 )}
               </motion.div>

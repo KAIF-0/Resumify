@@ -19,7 +19,7 @@ export const Footer = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/kaif-khan-47bb19292/",
+      href: "https://www.linkedin.com/in/kaif-khan-47bb19292",
       color: "hover:text-white",
     },
   ];
