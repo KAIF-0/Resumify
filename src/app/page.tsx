@@ -23,7 +23,6 @@ const Index = () => {
 
       const portfolioId = await portfolioService.handleProcessResume(file);
       setUploadedFile(null);
-      setIsProcessing(false);
 
       router.push(`/portfolio/${portfolioId}`);
     } catch (error) {
