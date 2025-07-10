@@ -18,6 +18,8 @@ export interface PortfolioData {
   phone?: string;
   location?: string;
   photo?: string;
+  linkedIn?: string;
+  github?: string;
   Experience: Experience[];
   Project: Project[];
   SkillCategory: SkillCategory[];

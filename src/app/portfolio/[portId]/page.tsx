@@ -16,6 +16,7 @@ import {
   Loader,
   Loader2,
   Circle,
+  Codesandbox,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,6 +26,7 @@ import portfolioService from "@/service/portfolio.service";
 import { toast } from "@/hooks/use-toast";
 import ErrorState from "@/components/ErrorState";
 import ProcessingState from "@/components/ProcessingState";
+import { supabase } from "@/configs/supabase.config";
 
 // interface portStatus {
 //   status: "READY" | "PROCESSING" | "ERROR";
@@ -41,6 +43,27 @@ const PortfolioPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("PortfolioChannel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "Portfolio" },
+        (payload) => {
+          if (payload.eventType === "UPDATE") {
+            if (payload.new.id === portId) {
+              window.location.reload();
+            }
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [portId]);
 
   useEffect(() => {
     // Get user data from localStorage or API
@@ -191,6 +214,18 @@ const PortfolioPage = () => {
                     <span>{userData.location}</span>
                   </div>
                 )}
+                {userData?.github && (
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <span>{userData.github}</span>
+                  </div>
+                )}
+                {userData?.linkedIn && (
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>{userData.linkedIn}</span>
+                  </div>
+                )}
               </motion.div>
             </motion.div>
 
@@ -289,7 +324,7 @@ const PortfolioPage = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + index * 0.1 }}
                       >
-                        <Card className="glass rounded-2xl p-6 border-white/10 hover:border-white/20 transition-all duration-300 h-full">
+                        <Card className="glass rounded-2xl p-6 flex flex-col justify-stretch border-white/10 hover:border-white/20 transition-all duration-300 h-full">
                           <div className="flex justify-between items-start mb-4">
                             <h3 className="text-xl font-semibold text-white">
                               {project.name}
@@ -306,19 +341,6 @@ const PortfolioPage = () => {
                                   title="View Source Code"
                                 >
                                   <Github className="w-4 h-4" />
-                                </motion.a>
-                              )}
-                              {project.link && (
-                                <motion.a
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="p-2 bg-white/10 rounded-lg text-white/60 hover:text-white hover:bg-white/20 transition-all duration-300"
-                                  whileHover={{ scale: 1.1 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  title="Live Demo"
-                                >
-                                  <Eye className="w-4 h-4" />
                                 </motion.a>
                               )}
                               {!project.github && project.link && (
@@ -429,7 +451,7 @@ const PortfolioPage = () => {
                         <Card className="glass rounded-2xl p-6 border-white/10 hover:border-white/20 transition-all duration-300">
                           <div className="flex items-center gap-3 mb-4">
                             <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                              {/* <category.icon className="w-5 h-5 text-white" /> */}
+                              <Codesandbox className="size-3" />
                             </div>
                             <h3 className="text-xl font-semibold text-white">
                               {category.name}
@@ -529,13 +551,16 @@ const PortfolioPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.7 + index * 0.1 }}
                       >
-                        <Card className="glass rounded-2xl p-6 border-white/10">
-                          <h3 className="text-xl font-semibold text-white">
-                            {edu.degree}
-                          </h3>
-                          <p className="text-lg text-white/80">
-                            {edu.institution}
-                          </p>
+                        <Card className="glass rounded-2xl p-6 flex justify-between border-white/10">
+                          <div className="flex flex-col">
+                            <h3 className="text-xl font-semibold text-white">
+                              {edu.degree}
+                            </h3>
+                            <p className="text-lg text-white/80">
+                              {edu.institution}
+                            </p>
+                          </div>
+
                           <p className="text-white/60">{edu.year}</p>
                         </Card>
                       </motion.div>
