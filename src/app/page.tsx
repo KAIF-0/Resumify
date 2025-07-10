@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, CheckCircle, Zap, Star } from "lucide-react";
@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import portfolioService from "@/service/portfolio.service";
 
 const Index = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -16,65 +17,24 @@ const Index = () => {
   const { toast } = useToast();
 
   const handleFileUpload = async (file: File) => {
-    setUploadedFile(file);
-    setIsProcessing(true);
+    try {
+      setUploadedFile(file);
+      setIsProcessing(true);
 
-    // Simulate AI processing
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+      const portfolioId = await portfolioService.handleProcessResume(file);
+      setUploadedFile(null);
+      setIsProcessing(false);
 
-    // Generate a unique ID for the portfolio
-    const portfolioId = `${file.name
-      .replace(".pdf", "")
-      .toLowerCase()
-      .replace(/\s+/g, "-")}-${Date.now()}`;
-
-    // Store mock extracted data
-    const mockData = {
-      name: "Alex Johnson",
-      title: "Full Stack Developer",
-      summary:
-        "Passionate software developer with 5+ years of experience building scalable web applications.",
-      email: "alex.johnson@email.com",
-      phone: "+1 (555) 123-4567",
-      location: "San Francisco, CA",
-      experience: [
-        {
-          company: "TechCorp Inc.",
-          role: "Senior Full Stack Developer",
-          startDate: "2022",
-          endDate: "Present",
-          description:
-            "Lead development of enterprise web applications serving 100k+ users.",
-        },
-      ],
-      projects: [
-        {
-          name: "E-commerce Platform",
-          description:
-            "Full-stack e-commerce solution with React, Node.js, and PostgreSQL.",
-          technologies: ["React", "Node.js", "PostgreSQL"],
-        },
-      ],
-      skills: ["JavaScript", "React", "Node.js", "Python", "PostgreSQL", "AWS"],
-      education: [
-        {
-          institution: "University of California, Berkeley",
-          degree: "Bachelor of Science in Computer Science",
-          year: "2019",
-        },
-      ],
-    };
-
-    localStorage.setItem(`portfolio-${portfolioId}`, JSON.stringify(mockData));
-
-    toast({
-      title: "Portfolio Generated!",
-      description:
-        "Your resume has been transformed into a beautiful portfolio.",
-    });
-
-    // Navigate to portfolio
-    router.push(`/portfolio/${portfolioId}`);
+      router.push(`/portfolio/${portfolioId}`);
+    } catch (error) {
+      setUploadedFile(null);
+      setIsProcessing(false);
+      console.log(error);
+      toast({
+        title: "Resume Upload Failed",
+        description: "Failed to create your Portfolio! Please Try again...",
+      });
+    }
   };
 
   const features = [
@@ -169,7 +129,7 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + index * 0.1 }}
-                className="glass rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-300"
+                className=" rounded-2xl p-6 text-center border border-white/20 bg-white/15 hover:bg-white/10 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-6 h-6 text-white" />
@@ -267,7 +227,7 @@ const Index = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="glass rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-300"
+                className="glass rounded-2xl p-6 border border-white/20 bg-white/15 text-center hover:bg-white/10 transition-all duration-300"
               >
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />

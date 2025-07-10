@@ -7,7 +7,7 @@ export const Footer = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/yourusername",
+      href: "https://github.com/kaif-0",
       color: "hover:text-white",
     },
     {
@@ -19,7 +19,7 @@ export const Footer = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://www.linkedin.com/in/kaif-khan-47bb19292/",
       color: "hover:text-white",
     },
   ];
@@ -65,7 +65,8 @@ export const Footer = () => {
               Resumify
             </p>
             <p className="mt-2">
-              © 2024 Resumify. Transform your resume into a stunning portfolio.
+              © {new Date().getFullYear()} Resumify. Transform your resume into
+              a stunning portfolio.
             </p>
           </div>
         </motion.div>
