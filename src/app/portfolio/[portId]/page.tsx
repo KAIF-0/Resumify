@@ -458,7 +458,7 @@ const PortfolioPage = () => {
                         <Card className="glass rounded-2xl p-6 border-white/10 hover:border-white/20 transition-all duration-300">
                           <div className="flex items-center gap-3 mb-4">
                             <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                              <Codesandbox className="size-3" />
+                              <Codesandbox className="size-5" />
                             </div>
                             <h3 className="text-xl font-semibold text-white">
                               {category.name}
@@ -533,6 +533,44 @@ const PortfolioPage = () => {
                       ))}
                     </div>
                   </Card>
+                </>
+              )}
+            </motion.div>
+
+            {/* Achievements Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mb-16"
+            >
+              {userData && userData?.achievements?.length > 0 && (
+                <>
+                  <h2 className="text-3xl font-bold font-space mb-8 text-white">
+                    Achievements
+                  </h2>
+                  <div className="space-y-6">
+                    <Card className="glass rounded-2xl p-6 flex flex-col gap-2 justify-between border-white/10">
+                      {userData?.achievements.map((achievement, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.7 + index * 0.1 }}
+                        >
+                          <div
+                            key={index}
+                            className="flex items-center text-white/90"
+                          >
+                            <span>
+                              <Circle className="size-2 bg-white/90 rounded full mr-2" />
+                            </span>
+                            <p>{achievement}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </Card>
+                  </div>
                 </>
               )}
             </motion.div>
