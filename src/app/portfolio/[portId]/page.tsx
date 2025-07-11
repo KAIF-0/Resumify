@@ -445,7 +445,7 @@ const PortfolioPage = () => {
               {userData && userData?.SkillCategory?.length > 0 && (
                 <>
                   <h2 className="text-3xl font-bold font-space mb-8 text-white">
-                    Technical Skills
+                    Skills
                   </h2>
                   <div className="grid md:grid-cols-3 gap-6">
                     {userData?.SkillCategory.map((category, index) => (
