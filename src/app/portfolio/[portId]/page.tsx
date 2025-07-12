@@ -18,6 +18,8 @@ import {
   Circle,
   Codesandbox,
   Linkedin,
+  Copy,
+  Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -44,6 +46,17 @@ const PortfolioPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
+  const [accessMap, setAccessMap] = useState<Record<string, boolean>>({});
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  //accessmap from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const portfolioAccessMap = JSON.parse(localStorage.getItem("portfolioAccess") || "{}");
+      setAccessMap(portfolioAccessMap);
+      // console.log(portfolioAccessMap, portfolioAccessMap[portId as string]);
+    }
+  }, [portId]);
 
   useEffect(() => {
     const channel = supabase
@@ -124,6 +137,16 @@ const PortfolioPage = () => {
     }
   };
 
+  const handleCopyUrl = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    setIsCopied(true);
+
+    //halt
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center">
@@ -144,7 +167,23 @@ const PortfolioPage = () => {
     case PortStatus[PortStatus.READY]:
       return (
         <div className="min-h-screen text-white max-w-7xl mx-auto">
-          <div className="container mx-auto px-6 py-12">
+          <div className="container mx-auto px-6 py-12 relative">
+            {/* Copy URL Button */}
+            {accessMap[portId as string] && <motion.button
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 }}
+              onClick={handleCopyUrl}
+              className="fixed top-6 right-6 z-40 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 border border-white/20"
+              title="Copy Portfolio URL"
+            >
+              {isCopied ? (
+                <Check className="w-5 h-5 text-green-400" />
+              ) : (
+                <Copy className="w-5 h-5 text-white" />
+              )}
+            </motion.button>}
+
             {/* Header Section */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -164,12 +203,12 @@ const PortfolioPage = () => {
                     <Camera className="w-12 h-12 text-white/60" />
                   </div>
                 )}
-                <button
+                {accessMap[portId as string] && <button
                   onClick={() => setIsPhotoModalOpen(true)}
                   className="absolute -bottom-2 -right-2 w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
                 >
                   <Camera className="w-5 h-5 text-white" />
-                </button>
+                </button>}
               </div>
 
               <motion.h1

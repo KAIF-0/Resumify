@@ -72,6 +72,14 @@ class PortfolioService {
         throw new Error(error.message);
       }
 
+
+      //localstorage track
+      const accessMap = await JSON.parse(localStorage.getItem("portfolioAccess") || "{}");
+
+      accessMap[portfolioId] = true;
+
+      localStorage.setItem("portfolioAccess", JSON.stringify(accessMap));
+
       return portfolioId;
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);
