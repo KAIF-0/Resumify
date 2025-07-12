@@ -178,7 +178,7 @@ const PortfolioPage = () => {
               title="Copy Portfolio URL"
             >
               {isCopied ? (
-                <Check className="w-5 h-5 text-green-400" />
+                <Check className="w-5 h-5 text-white" />
               ) : (
                 <Copy className="w-5 h-5 text-white" />
               )}
