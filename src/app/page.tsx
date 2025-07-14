@@ -187,7 +187,7 @@ const Index = () => {
             Want to see it in action? Try our demo portfolio
           </p>
           <Button
-            onClick={() => router.push("/portfolio/demo-alex-johnson-123")}
+            onClick={() => router.push("/portfolio/b5db0673-fecf-4e1f-88f7-c3aad5bc2f28")}
             variant="outline"
             size="lg"
             className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:border-white/50"
