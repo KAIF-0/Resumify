@@ -331,7 +331,7 @@ const PortfolioPage = () => {
                               </span>
                             </div>
                           </div>
-                          {exp.description.split("•").map((d, index) => (
+                          {exp.description.split(".").map((d, index) => (
                             <div
                               key={index}
                               className="flex items-center text-white/90"
@@ -404,7 +404,7 @@ const PortfolioPage = () => {
                             </div>
                           </div>
                           <div className="text-white/90 mb-4">
-                            {project.description.split("•").map((d, index) => (
+                            {project.description.split(".").map((d, index) => (
                               <div
                                 key={index}
                                 className="flex items-center text-white/90"
