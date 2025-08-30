@@ -79,7 +79,7 @@ const Template3: React.FC<TemplateProps> = ({
                     transition={{ type: "spring", stiffness: 260, damping: 18 }}
                   />
                 ) : (
-                  <div className="w-40 h-40 bg-white/10 rounded-2xl flex items-center justify-center border-4 border-white/20">
+                  <div className="size-72 bg-white/10 rounded-2xl flex items-center justify-center border-4 border-white/20">
                     <Camera className="w-16 h-16 text-white/60" />
                   </div>
                 )}
@@ -252,7 +252,7 @@ const Template3: React.FC<TemplateProps> = ({
                   <Card className="glass rounded-3xl p-8 border-white/10 hover:border-white/20 hover:scale-[1.02] transition-all duration-500 overflow-hidden">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
 
-                    <div className="flex-col md:flex-row justify-between gap-8 items-center relative z-10">
+                    <div className="flex-row justify-between gap-8 items-center relative z-10">
                       <div className="md:col-span-2">
                         <h3 className="text-2xl font-semibold text-white mb-4 group-hover:text-primary transition-colors">
                           {project.name}
@@ -290,10 +290,10 @@ const Template3: React.FC<TemplateProps> = ({
                       </div>
 
                       <div className="flex flex-col gap-3">
-                        {project.link && (
+                        {project.github && (
                           <Button
                             asChild
-                            className="w-full bg-white/20 hover:bg-white/30 text-white border-0"
+                            className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20"
                           >
                             <a href={project.link} target="_blank" rel="noopener noreferrer">
                               <Eye className="w-4 h-4 mr-2" />
@@ -304,7 +304,6 @@ const Template3: React.FC<TemplateProps> = ({
                         {project.github && (
                           <Button
                             asChild
-                            variant="outline"
                             className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20"
                           >
                             <a href={project.github} target="_blank" rel="noopener noreferrer">
