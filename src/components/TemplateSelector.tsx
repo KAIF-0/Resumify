@@ -1,6 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Palette, Layout, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { templates } from "@/lib/templateConstant";
 

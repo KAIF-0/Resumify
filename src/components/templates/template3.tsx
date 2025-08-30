@@ -11,21 +11,16 @@ import {
   Linkedin,
   Copy,
   Check,
-  ExternalLink,
-  Calendar,
   Coffee,
   Gamepad2,
   Music,
   Circle,
   Eye,
   Codesandbox,
-  Star,
   Award,
-  ArrowRight,
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { PortfolioData } from '@/utils/types';
 import { TemplateProps } from '@/utils/templateTypes';
 
 

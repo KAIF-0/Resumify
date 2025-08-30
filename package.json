@@ -8,12 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "eslintConfig": {
-    "rules": {
-      "@typescript-eslint/no-unused-vars": "warn",
-      "@next/next/no-img-element": "warn"
-    }
-  },
   "dependencies": {
     "@radix-ui/react-toast": "^1.2.14",
     "@supabase/supabase-js": "^2.50.4",

@@ -24,17 +24,7 @@ import {
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { PortfolioData } from '@/utils/types';
 import { TemplateProps } from '@/utils/templateTypes';
-
-interface Template2Props {
-  userData: PortfolioData | null;
-  portId: string;
-  accessMap: Record<string, boolean>;
-  isCopied: boolean;
-  handleCopyUrl: () => Promise<void>;
-  setIsPhotoModalOpen: (open: boolean) => void;
-}
 
 const Template2: React.FC<TemplateProps> = ({
   userData,

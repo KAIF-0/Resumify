@@ -20,7 +20,6 @@ import {
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { PortfolioData } from '@/utils/types';
 import { TemplateProps } from '@/utils/templateTypes';
 
 

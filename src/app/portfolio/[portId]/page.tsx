@@ -143,9 +143,6 @@ const PortfolioPage = () => {
           <p className="text-white">
             Loading your amazing and interactive portfolio...
           </p>
-          <div className="mt-4 text-white opacity-50">
-            Sit back and enjoy the magic happening!
-          </div>
         </div>
       </div>
     );
