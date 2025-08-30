@@ -61,6 +61,32 @@ class PortfolioService {
     }
   };
 
+  // handleDownlaodResume = async (portfolioId: string) => {
+  //   try {
+  //     const { data, error } = await this.supabase
+  //       .from("Portfolio")
+  //       .select("resumeUrl")
+  //       .eq("id", portfolioId)
+  //       .limit(1);
+
+  //     if (error || data.length == 0) {
+  //       throw new Error(error?.message || "Could not find the respective Portfolio Data!");
+  //     }
+  //     console.log(data);
+
+  //     const resumeUrl = data[0]?.resumeUrl;
+
+  //     if (!resumeUrl) {
+  //       throw new Error("No Resume URL found!");
+  //     }
+
+  //     return resumeUrl;
+  //   } catch (error) {
+  //     if (error instanceof Error) throw new Error(error.message);
+  //     throw Error("Failed to fetch Resume URL!");
+  //   }
+  // };
+
   handleDatabaseOps = async () => {
     try {
       const portfolioId = uuidv4();
