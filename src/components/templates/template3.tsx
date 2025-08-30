@@ -290,7 +290,7 @@ const Template3: React.FC<TemplateProps> = ({
                       </div>
 
                       <div className="flex flex-col gap-3">
-                        {project.github && (
+                        {project.link && (
                           <Button
                             asChild
                             className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20"
